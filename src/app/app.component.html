@@ -1,0 +1,95 @@
+<div id="wrapper">
+  <!-- Header Code Begins -->
+  <header>
+    <div class="container">
+      <!-- Logo -->
+      <a href="/" class="logo">
+        Rental Management System
+      </a>
+      <!-- Location Selector -->
+
+      <nav class="location-selector">
+        <ul>
+          <li>
+            Select location
+            <ul>
+              <li *ngFor="let location of locationData">
+                <a (click)="onLocationClick($event)">{{ location.name }}</a>
+                <ul>
+                  <li *ngFor="let branch of location.branches">
+                    <a (click)="onBranchClick($event)">{{ branch.name }}</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <!-- Header Code Ends -->
+  <!-- Main Content Code Begins -->
+  <main>
+    <div class="container">
+      <!-- Breadcrumb -->
+      <nav *ngIf="hideWelcomMsg" class="breadcrumb">
+        <ul>
+          <li>
+            <span>Home</span>
+          </li>
+          <li>
+            <span style="cursor: default;"> / {{ selectedBranchName }}</span>
+          </li>
+        </ul>
+      </nav>
+      <!-- Breadcrumb ends -->
+
+      <!-- Welcome -->
+      <div class="welcome-message" *ngIf="!hideWelcomMsg">
+        <h2>Welcome to <span>Rental Management System</span></h2>
+        <p>Please select a Location</p>
+      </div>
+
+      <!-- Welcome Ends -->
+
+      <!-- Category Data -->
+      <div class="category-list" *ngIf="showCategoryData">
+        <div
+          *ngFor="let cat of categorySelectedData"
+          (click)="getSubCategoryData(cat.name)"
+          class="category-item"
+        >
+          <img
+            class="category-image"
+            src="../assets/images/{{ cat.image }}"
+            alt=""
+            onerror="this.src='../assets/images/image-not-available.jpg'"
+          />
+          <h3 class="cat-item-title">{{ cat.name }} <span>&#9658;</span></h3>
+        </div>
+      </div>
+      <!-- Category Data Ends-->
+      <!-- Subcategory Data -->
+      <div class="category-list" *ngIf="!showCategoryData">
+        <div
+          *ngFor="let subcat of subcategorySelectedData"
+          style="cursor: default;"
+          class="category-item"
+        >
+          <img
+            class="category-image"
+            src="../assets/images/subcategory/{{ subcat.image }}"
+            alt=""
+            onerror="this.src='../assets/images/image-not-available.jpg'"
+          />
+          <h3 class="cat-item-title">{{ subcat.name }} <span>&#9658;</span></h3>
+        </div>
+      </div>
+      <!-- Subcategory Data Ends -->
+    </div>
+  </main>
+  <!-- Main Content Code Ends -->
+  <footer>
+    &nbsp;
+  </footer>
+</div>
